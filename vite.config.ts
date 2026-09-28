@@ -10,4 +10,9 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  // Mermaid is only reached through a dynamic import, so Vite wouldn't find it at startup and would
+  // re-bundle it mid-session, failing that first request with "504 Outdated Optimize Dep".
+  optimizeDeps: {
+    include: ['mermaid'],
+  },
 })
