@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { Link } from 'react-router'
 import { motion, useMotionTemplate, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
 import { education, experience, profile, projects, skills, stats, type Project } from '../data/resume'
 import { Counter, Reveal, Section, container } from './ui'
@@ -280,7 +281,19 @@ export function Footer({ onNavigate }: { onNavigate: (id: string) => void }) {
           Avinash <span className="font-serif font-normal italic tracking-[-0.02em]">Saini</span>
         </motion.p>
         <div className="mt-6 flex flex-col gap-3 border-t border-line pt-5 text-sm text-faint md:flex-row md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} Avinash Saini</span>
+          <span>
+            © {new Date().getFullYear()} Avinash Saini
+            {/* Deliberately quiet: the study pages are for personal use, not part of the portfolio. */}
+            <span className="ml-3 text-[0.7rem] text-faint/40">
+              <Link to="/book" className="transition-colors hover:text-dim">
+                notes
+              </Link>
+              {' · '}
+              <Link to="/preparation" className="transition-colors hover:text-dim">
+                prep
+              </Link>
+            </span>
+          </span>
           <span>Built with React, Three.js and a lot of coffee.</span>
           <button onClick={() => onNavigate('home')} className="link self-start text-dim hover:text-paper md:self-auto">
             Back to top ↑
