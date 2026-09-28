@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "Geist Mono", ui-monospace, Menlo, monospace;
+
+  --color-ink: #000000;
+  --color-paper: #ececea;
+  --color-dim: #9a9a96;
+  --color-faint: #5c5c59;
+  --color-line: rgb(255 255 255 / 0.14);
+  --color-accent: #ff6a3d;
+}
+
+html {
+  background: var(--color-ink);
+  color-scheme: dark;
+}
+
+/* Normal screens keep the 16px root. From 1600px up, every rem-based size (type, spacing,
+   containers) grows with the window so large monitors get the same proportions instead of a
+   small island in the middle. Media queries still use the browser's 16px, so breakpoints are unaffected. */
+@media (min-width: 1600px) {
+  html { font-size: clamp(16px, calc(100vw / 100), 24px); }
+}
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+/* No body background: it would paint over the fixed -z canvas. html carries the page colour. */
+body {
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "tnum";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--color-paper); color: var(--color-ink); }
+
+section { scroll-margin-top: 4rem; }
+
+/* Underline that draws in from the left on hover. */
+.link {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s;
+}
+.link:hover, .link:focus-visible { background-size: 100% 1px; }
+
+.link-static {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+}
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 45s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}
